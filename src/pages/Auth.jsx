@@ -1,7 +1,10 @@
-import { useContext, useState } from "react";
+//2:36 youtube name pedro tech reactjs full course 2026
+//What a hook is in react?
+//here usestate,usenavigate,usecontext are hook, a hook is a function in react that lets you use state lifecycle logic and react features inside of it and they can return some information so its kind of like in-between normal function and a component because what it does is if wanted to create a function like normal function that isnot a state like get, you cannot call a hook inside a function but with hooks you can , only call hooks at top level of component
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Auth() {
   const [mode, setMode] = useState("signup");
@@ -9,7 +12,7 @@ export default function Auth() {
 
   const navigate = useNavigate()
 
-  const { signUp, user, logout, login } = useContext(AuthContext);
+  const { signUp, login } = useAuth();
 
   const {
     register,
@@ -31,16 +34,12 @@ export default function Auth() {
     } else {
       setError(result.error);
     }
-
-    console.log(result);
   }
 
   return (
     <div className="page">
       <div className="container">
         <div className="auth-container">
-          {user && <p>User logged in: {user.email} </p>}
-          <button onClick={() => logout()}>Logout</button>
           <h1 className="page-title">
             {mode === "signup" ? "Sign Up" : "Login"}
           </h1>
